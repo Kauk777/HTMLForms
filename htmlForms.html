@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Basic input types</title>
+    <link rel="stylesheet" href="../css/sample_css_form.css" media="all">
+</head>
+<body>
+    <form name="myForm">
+        <header class="headerContainer"><h1>HTML 5 Input Form Fields</h1></header>
+        <div>
+            <label for="text">Enter Name: </label>
+            <input type="text" id="text" name="text" required>
+            <error-output class="text-error" for="text"></error-output>
+        </div>
+        <div>
+            <label for="pwd">Enter Password: </label>
+            <input type="password" id="pwd" name="pwd" pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[@#$%^&-+_=]{1}).{8,}$" title="Min 8 charcters, atleast 1 uppercase,1 lowercase, 1 digit and 1 special char" required>
+            
+        </div>
+        <div>
+            <label for="email">Enter Email: </label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div>
+            <label for="url">URL type: </label>
+            <input type="url" id="url" name="url">
+        </div>
+        <div>
+            <label for="number">Number type: </label>
+            <input type="number" id="number" name="number">
+            
+        </div>
+        <div>
+            <label for="tel">Tel input type: </label>
+            <input type="tel" id="tel" name="tel">
+            <error-output class="phone-error" for="tel"></error-output>
+        </div>
+        <div>
+            <label for="search">Search Input type: </label>
+            <input type="search" id="search" name="search">
+        </div>
+        <div class="dateTime">
+            <label for="party">Choose date and time: </label>
+            <input type="datetime-local" id="party" name="buddey">
+            <span class="validity"></span>
+        </div>
+        <div>
+            <label for="salary">Choose salary: </label>
+            <input type="range" id="salary" name="salary" min="980000" max="1300000" step="10000" value="1100000">
+            <output class="salary-output" for="salary">1100000</output>
+        </div>
+        <div>
+            <button>Submit</button>
+        </div>
+    </form>
+    <script>
+        const name=document.getElementById('text');
+        const errorOutput=document.querySelector('.text-error');
+        name.addEventListener('input',function() {
+            let nameReg=RegExp('^[A-Z]{1}[a-z]{3,}$');
+            if(nameReg.test(name.value))
+            errorOutput.innerHTML="";
+            else
+            errorOutput.innerHTML="Invalid Name!!";
+        });
+        const email=document.querySelector('#email');
+        email.addEventListener('change',function() {
+            let emailReg=RegExp('^[0-9a-zA-Z_+-]+(\\.?[0-9a-zA-Z_+-]*)[^\\.]@[0-9a-zA-Z]+(\\.[0-9a-zA-Z]{2,})(\\.?[a-zA-Z]{2,})?$');
+            if(!(emailReg.test(email.value)))
+            alert("Invalid email type");
+        });
+        const mobile=document.getElementById('tel');
+        const phonerror=document.querySelector('.phone-error');
+        mobile.addEventListener('input',function() {
+            let phoneReg=RegExp('^[0-9]{2}\\s{1}[6-9]{1}[0-9]{9}$');
+            if(phoneReg.test(mobile.value))
+            phonerror.textContent="";
+            else
+            phonerror.textContent="Invalid mobile number";
+        });
+        const salary=document.querySelector('#salary');
+        const output=document.querySelector('.salary-output');
+        salary.addEventListener('input',function() {
+            output.textContent=salary.value;
+        });
+    </script>
+</body>
+</html>
